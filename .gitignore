@@ -1,0 +1,54 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.Rds
+
+# Build products
+*.tar.gz
+*.zip
+
+# RStudio files
+*.Rproj
+.Rproj.user/
+
+# RMarkdown cache
+*.nb.html
+*.knit.md
+
+# Jupyter notebooks
+*.ipynb
+
+# Shiny apps
+app.R
+
+# Test coverage files
+coverage/
+
+# Package build files
+.Rcheck/
+*_*.tar.gz
+
+
+
+# IDE specific files
+.idea/
+.vscode/
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache files
+.cache/
+
+# Log files
+*.log
+
+# Compiled code
+src/*.o
+src/*.so
+src/*.dll

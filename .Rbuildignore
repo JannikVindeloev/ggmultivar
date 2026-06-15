@@ -1,0 +1,16 @@
+^.*\.Rproj$\n
+^\\.Rhistory$\n
+^\\.RData$\n
+^\\.Rds$\n
+^\\.git$\n
+^\\.gitignore$\n
+^README\\.md$\n
+^\\.travis\\.yml$\n
+^appveyor\\.yml$\n
+^codecov\\.yml$\n
+^\\.codecov$\n
+^cran-comments\\.md$\n
+^revdep$\n
+^tests/.*\\.R$\n
+^inst/doc/.*\\.R$\n
+^inst/doc/.*\\.Rmd$
