@@ -1,12 +1,3 @@
-#' Check if required packages are available
-#' @description Helper function to check package availability
-#' @param packages Character vector of package names
-#' @return Logical vector indicating availability
-#' @noRd
-check_packages <- function(packages) {
-  sapply(packages, function(pkg) requireNamespace(pkg, quietly = TRUE))
-}
-
 #' Validate data structure for multivariate analysis
 #' @param data Data frame or matrix
 #' @param n_components Number of components to validate
