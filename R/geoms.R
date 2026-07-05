@@ -37,11 +37,18 @@ NULL
 #' }
 #' 
 #' @export
-geom_encircle <- function(mapping = NULL, data = NULL, 
-                          geom = c("ellipse", "hull", "polygon"),
-                          group_by = NULL, level = 0.95,
-                          color = "gray50", fill = NA, 
-                          linetype = "dashed", alpha = 0.2, ...) {
+geom_encircle <- function(
+    mapping = NULL,
+    data = NULL,
+    geom = c("ellipse", "hull", "polygon"),
+    group_by = NULL,
+    level = 0.95,
+    color = "gray50",
+    fill = NA,
+    linetype = "dashed",
+    alpha = 0.2,
+    ...
+) {
   
   geom <- match.arg(geom)
   
@@ -52,14 +59,18 @@ geom_encircle <- function(mapping = NULL, data = NULL,
   layer(
     data = data,
     mapping = mapping,
-    stat = switch(geom,
-                  "ellipse" = StatEllipse,
-                  "hull" = StatHull,
-                  "polygon" = StatHull),
-    geom = switch(geom,
-                  "ellipse" = GeomPath,
-                  "hull" = GeomPolygon,
-                  "polygon" = GeomPolygon),
+    stat = switch(
+      geom,
+      "ellipse" = StatEllipse,
+      "hull" = StatHull,
+      "polygon" = StatHull
+    ),
+    geom = switch(
+      geom,
+      "ellipse" = GeomPath,
+      "hull" = GeomPolygon,
+      "polygon" = GeomPolygon
+    ),
     position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
@@ -146,10 +157,16 @@ StatHull <- ggproto("StatHull", Stat,
 #' }
 #' 
 #' @export
-geom_confidence_interval <- function(mapping = NULL, data = NULL,
-                                     method = c("bootstrap", "jackknife"),
-                                     n_boot = 100, level = 0.95,
-                                     color = "gray50", linetype = "dashed", ...) {
+geom_confidence_interval <- function(
+    mapping = NULL,
+    data = NULL,
+    method = c("bootstrap", "jackknife"),
+    n_boot = 100,
+    level = 0.95,
+    color = "gray50",
+    linetype = "dashed",
+    ...
+) {
   
   method <- match.arg(method)
   
@@ -238,9 +255,14 @@ StatConfidenceInterval <- ggproto("StatConfidenceInterval", Stat,
 #' }
 #' 
 #' @export
-geom_correlation_circle <- function(mapping = NULL, data = NULL,
-                                     radius = 1, color = "gray70", 
-                                     linetype = "dashed", ...) {
+geom_correlation_circle <- function(
+    mapping = NULL,
+    data = NULL,
+    radius = 1,
+    color = "gray70",
+    linetype = "dashed",
+    ...
+) {
   
   # Create circle data
   circle_data <- data.frame(
@@ -291,10 +313,16 @@ geom_correlation_circle <- function(mapping = NULL, data = NULL,
 #' }
 #' 
 #' @export
-geom_sample_labels <- function(mapping = NULL, data = NULL,
-                                size = 3, color = "black",
-                                vjust = -0.5, hjust = 0.5, 
-                                check_overlap = TRUE, ...) {
+geom_sample_labels <- function(
+    mapping = NULL,
+    data = NULL,
+    size = 3,
+    color = "black",
+    vjust = -0.5,
+    hjust = 0.5,
+    check_overlap = TRUE,
+    ...
+) {
   
   layer(
     data = data,
@@ -338,8 +366,13 @@ geom_sample_labels <- function(mapping = NULL, data = NULL,
 #' }
 #' 
 #' @export
-geom_variable_labels <- function(mapping = NULL, data = NULL,
-                                  size = 4, color = "red", ...) {
+geom_variable_labels <- function(
+    mapping = NULL,
+    data = NULL,
+    size = 4,
+    color = "red",
+    ...
+) {
   
   layer(
     data = data,

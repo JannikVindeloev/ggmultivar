@@ -42,12 +42,24 @@
 #' }
 #' 
 #' @export
-ggscores <- function(data, x_component = 1, y_component = 2,
-                     color_by = NULL, shape_by = NULL, size_by = NULL,
-                     facet_by = NULL, show_ellipse = FALSE, ellipse_level = 0.95,
-                     show_labels = FALSE, label_size = 3,
-                     xlab = NULL, ylab = NULL, explained_variance = NULL,
-                     method = "pca", ...) {
+ggscores <- function(
+    data,
+    x_component = 1,
+    y_component = 2,
+    color_by = NULL,
+    shape_by = NULL,
+    size_by = NULL,
+    facet_by = NULL,
+    show_ellipse = FALSE,
+    ellipse_level = 0.95,
+    show_labels = FALSE,
+    label_size = 3,
+    xlab = NULL,
+    ylab = NULL,
+    explained_variance = NULL,
+    method = "pca",
+    ...
+) {
   
   # If data is a mixOmics object, extract scores
   if (inherits(data, c("pca", "pls", "spls", "splsda", "rgcca", "diablo"))) {

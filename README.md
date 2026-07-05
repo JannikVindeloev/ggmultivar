@@ -78,15 +78,15 @@ data(wine)
 
 # PCA with mixOmics
 pca_mix <- pca(wine$X, ncomp = 3)
-mixomics_scores_plot(pca_mix, color_by = wine$Y)
+ggscores(pca_mix, color_by = wine$Y)
 
 # PLS with mixOmics
 pls_mix <- pls(wine$X, wine$Y, ncomp = 3)
-mixomics_biplot(pls_mix)
+ggbiplot(pls_mix)
 
 # sPLS-DA with mixOmics
 splsda_mix <- splsda(wine$X, wine$Y, ncomp = 3)
-mixomics_scores_plot(splsda_mix)  # Automatically uses class labels
+ggscores(splsda_mix)
 ```
 
 ## Function Overview
@@ -98,12 +98,21 @@ mixomics_scores_plot(splsda_mix)  # Automatically uses class labels
 
 ### Plotting Functions
 
-**For PCA:** - `pca_scores_plot()`: Create scores plot - `pca_loadings_plot()`: Create loadings plot\
+**For PCA:**
+- `pca_scores_plot()`: Create scores plot
+- `pca_loadings_plot()`: Create loadings plot
 - `pca_biplot()`: Create combined scores and loadings plot
 
-**For PLS:** - `pls_scores_plot()`: Create scores plot - `pls_loadings_plot()`: Create loadings plot - `pls_biplot()`: Create combined scores and loadings plot
+**For PLS:**
+- `pls_scores_plot()`: Create scores plot
+- `pls_loadings_plot()`: Create loadings plot
+- `pls_biplot()`: Create combined scores and loadings plot
 
-**For mixOmics Objects:** - `mixomics_to_ggmultivar()`: Convert mixOmics object to ggmultivar format - `mixomics_scores_plot()`: Create scores plot directly from mixOmics object - `mixomics_loadings_plot()`: Create loadings plot directly from mixOmics object - `mixomics_biplot()`: Create biplot directly from mixOmics object
+**For mixOmics Objects:**
+- `mixomics_to_ggmultivar()`: Convert mixOmics object to ggmultivar format
+- `ggscores()`: Create scores plot directly from mixOmics object
+- `ggloadings()`: Create loadings plot directly from mixOmics object
+- `ggbiplot()`: Create biplot directly from mixOmics object
 
 ### Conversion Functions
 
@@ -162,7 +171,7 @@ All analysis functions return a list with the following components:
 
 ## Dependencies
 
-- Required: R (\>= 3.6.0), ggplot2, dplyr, tidyr, purrr, tibble
+- Required: R (>= 3.6.0), ggplot2, dplyr, tidyr, purrr, tibble
 - Suggested: pls, mixOmics, testthat, knitr, rmarkdown, covr
 
 ## Contributing
