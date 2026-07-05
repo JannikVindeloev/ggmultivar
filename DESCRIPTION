@@ -1,10 +1,10 @@
 Package: ggmultivar
 Type: Package
 Title: Multivariate Analysis Plots Using ggplot2
-Version: 0.1.0
+Version: 0.2.0
 Author: Jannik Vindeloev
 Maintainer: Jannik Vindeloev <jannik.vindeloev@example.com>
-Description: Create scores and loading plots for multivariate analysis (PCA, PLS, sPLS, sPLS-DA) using ggplot2 syntax. Compatible with mixOmics objects.
+Description: Create scores and loading plots for multivariate analysis using ggplot2 syntax. The package provides S3 methods for mixOmics objects and custom geoms for confidence intervals and encircling groups. Designed for layer-by-layer plot customization.
 License: MIT
 Encoding: UTF-8
 LazyData: true
@@ -18,16 +18,13 @@ Imports:
     tidyr,
     purrr,
     tibble,
-    stats,
-    prcomp,
-    pls
+    stats
 Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     covr,
-    mixOmics,
-    pls
+    mixOmics
 Config/testthat/edition: 3
 URL: https://github.com/JannikVindeloev/ggmultivar
 BugReports: https://github.com/JannikVindeloev/ggmultivar/issues
