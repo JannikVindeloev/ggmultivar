@@ -14,3 +14,4 @@
 ^tests/.*\\.R$\n
 ^inst/doc/.*\\.R$\n
 ^inst/doc/.*\\.Rmd$
+^\.Rproj\.user$
