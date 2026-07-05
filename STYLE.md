@@ -149,15 +149,19 @@ function(x,y,z)
 | Data reshaping | `tidyr` | Tidy data principles |
 | String manipulation | `stringr` | Consistent string operations |
 | Functional programming | `purrr` | Functional tools and iteration |
+| Graphs/networks | `tidygraph` | Tidy graph manipulation |
+
 
 ### Visualization & Graphics
 
 | Category | Preferred Package | Purpose |
 |----------|------------------|---------|
 | Static plotting | `ggplot2` | Grammar of Graphics |
-| Graphs/networks | `tidygraph` | Tidy graph manipulation |
 | Interactive graphics | `plotly` | Interactive visualizations |
 | Web applications | `shiny` | Interactive web apps |
+| Graphs graphics | `ggraph` | Grammar of Graphics for graphs |
+| Interactive Graphs | `visnetwork` | Interactive D3 network plots |
+
 
 ### Documentation
 
@@ -397,4 +401,4 @@ data |>
 
 | Date | Author | Changes |
 |------|--------|---------|
-| 2024-01-XX | Initial | Created style guide |
+| 2024-01-XX | JANVI | Created style guide |

@@ -25,8 +25,9 @@
 #' @examples
 #' \dontrun{
 #' library(mixOmics)
-#' data(wine)
-#' pca_obj <- pca(wine$X, ncomp = 3)
+#' data(iris)
+#' 
+#' pca_obj <- pca(iris[,1:4], ncomp = 3)
 #' 
 #' # Basic scores plot
 #' ggscores(pca_obj) +
