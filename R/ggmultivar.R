@@ -68,12 +68,11 @@
 NULL
 
 #' @importFrom ggplot2 ggplot aes geom_point geom_text geom_segment geom_path 
-#'   geom_abline theme_minimal labs xlab ylab ggtitle stat_ellipse
+#'   geom_abline theme_minimal labs xlab ylab ggtitle stat_ellipse ggproto
 #' @importFrom dplyr filter mutate arrange group_by ungroup summarise select bind_rows
 #' @importFrom tidyr pivot_longer pivot_wider
 #' @importFrom purrr map map_df
 #' @importFrom tibble tibble as_tibble
-#' @importFrom stats chull
 #' @useDynLib ggmultivar, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
