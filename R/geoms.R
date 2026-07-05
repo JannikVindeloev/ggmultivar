@@ -3,6 +3,7 @@
 #' @description Custom geoms for adding confidence intervals and encircling groups in ggmultivar plots.
 #' 
 #' @name custom-geoms
+#' @importFrom ggplot2 Stat StatEllipse GeomPath GeomPolygon GeomText PositionIdentity Layer ggproto aes
 NULL
 
 #' Geom for Encircing Groups
@@ -76,17 +77,17 @@ geom_encircle <- function(
     mapping = mapping,
     stat = switch(
       geom,
-      "ellipse" = StatEllipse,
+      "ellipse" = ggplot2::StatEllipse,
       "hull" = StatHull,
       "polygon" = StatHull
     ),
     geom = switch(
       geom,
-      "ellipse" = GeomPath,
-      "hull" = GeomPolygon,
-      "polygon" = GeomPolygon
+      "ellipse" = ggplot2::GeomPath,
+      "hull" = ggplot2::GeomPolygon,
+      "polygon" = ggplot2::GeomPolygon
     ),
-    position = PositionIdentity,
+    position = ggplot2::PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
@@ -109,7 +110,7 @@ geom_encircle <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatHull <- ggproto("StatHull", Stat,
+StatHull <- ggplot2::ggproto("StatHull", ggplot2::Stat,
   required_aes = c("x", "y"),
   
   compute_group = function(data, scales, group = NULL) {
@@ -142,7 +143,7 @@ StatHull <- ggproto("StatHull", Stat,
       return(data.frame())
     }
     
-    return(bind_rows(hull_data))
+    return(dplyr::bind_rows(hull_data))
   }
 )
 
@@ -204,8 +205,8 @@ geom_confidence_interval <- function(
     data = data,
     mapping = mapping,
     stat = StatConfidenceInterval,
-    geom = GeomPath,
-    position = PositionIdentity,
+    geom = ggplot2::GeomPath,
+    position = ggplot2::PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
@@ -227,7 +228,7 @@ geom_confidence_interval <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatConfidenceInterval <- ggproto("StatConfidenceInterval", Stat,
+StatConfidenceInterval <- ggplot2::ggproto("StatConfidenceInterval", ggplot2::Stat,
   required_aes = c("x", "y", "variable", "component"),
   
   compute_group = function(data, scales, method = "bootstrap", n_boot = 100, level = 0.95) {
@@ -257,7 +258,7 @@ StatConfidenceInterval <- ggproto("StatConfidenceInterval", Stat,
       return(data.frame())
     }
     
-    return(bind_rows(ci_data))
+    return(dplyr::bind_rows(ci_data))
   }
 )
 
@@ -319,8 +320,8 @@ geom_correlation_circle <- function(
   layer(
     data = circle_data,
     mapping = mapping,
-    geom = GeomPath,
-    position = PositionIdentity,
+    geom = ggplot2::GeomPath,
+    position = ggplot2::PositionIdentity,
     show.legend = FALSE,
     inherit.aes = FALSE,
     params = list(
@@ -387,8 +388,8 @@ geom_sample_labels <- function(
   layer(
     data = data,
     mapping = mapping,
-    geom = GeomText,
-    position = PositionIdentity,
+    geom = ggplot2::GeomText,
+    position = ggplot2::PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
@@ -452,8 +453,8 @@ geom_variable_labels <- function(
   layer(
     data = data,
     mapping = mapping,
-    geom = GeomText,
-    position = PositionIdentity,
+    geom = ggplot2::GeomText,
+    position = ggplot2::PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
