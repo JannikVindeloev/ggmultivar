@@ -13,7 +13,7 @@ NULL
 #' @param mapping Aesthetic mappings created by aes()
 #' @param data The data to be displayed
 #' @param geom The geometric object to use for display ("ellipse", "hull", or "polygon")
-#' @param group_by Character string indicating the column to group by
+#' @param group_by Character string indicating the column name to group by
 #' @param level Confidence level for ellipses (0-1). Default is 0.95.
 #' @param color Color of the encircling line. Default is "gray50"
 #' @param fill Fill color for the encircling shape. Default is NA (transparent)
@@ -72,9 +72,18 @@ geom_encircle <- function(
     stop("group_by must be specified")
   }
   
+  # Convert group_by string to symbol for aesthetic mapping
+  group_sym <- as.name(group_by)
+  
+  # Create aesthetic mapping for grouping
+  group_aes <- ggplot2::aes(group = group_sym)
+  
+  # Combine with existing mapping
+  combined_mapping <- ggplot2::aes_string(mapping, group_aes)
+  
   ggplot2::layer(
     data = data,
-    mapping = mapping,
+    mapping = combined_mapping,
     stat = switch(
       geom,
       "ellipse" = ggplot2::StatEllipse,
@@ -91,7 +100,6 @@ geom_encircle <- function(
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
-      group = as.name(group_by),
       level = level,
       color = color,
       fill = fill,
@@ -111,7 +119,7 @@ geom_encircle <- function(
 #' @usage NULL
 #' @export
 StatHull <- ggplot2::ggproto("StatHull", ggplot2::Stat,
-  required_aes = c("x", "y"),
+  required_aes = c("x", "y", "group"),
   
   compute_group = function(data, scales, group = NULL) {
     if (is.null(group)) {
