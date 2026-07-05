@@ -1,7 +1,13 @@
+---
+
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # ggmultivar: Multivariate Analysis Plots Using ggplot2
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![R-CMD-check](https://github.com/JannikVindeloev/ggmultivar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JannikVindeloev/ggmultivar/actions/workflows/R-CMD-check.yaml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![R-CMD-check](https://github.com/JannikVindeloev/ggmultivar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JannikVindeloev/ggmultivar/actions/workflows/R-CMD-check.yaml)
 
 **ggmultivar** provides a tidyverse-style interface for creating scores and loading plots for multivariate analysis methods including PCA, PLS, sPLS, and sPLS-DA. The package is designed to work seamlessly with both native R data structures and [mixOmics](https://mixomicsteam.github.io/) objects.
 
@@ -16,7 +22,7 @@
 
 ## Installation
 
-```r
+``` r
 # Install from GitHub
 devtools::install_github("JannikVindeloev/ggmultivar")
 
@@ -29,7 +35,7 @@ devtools::install_github("JannikVindeloev/ggmultivar")
 
 ### PCA with Native R Data
 
-```r
+``` r
 library(ggmultivar)
 
 # Perform PCA
@@ -48,7 +54,7 @@ pca_biplot(pca_result, color_by = mtcars$cyl)
 
 ### PLS with Native R Data
 
-```r
+``` r
 # Simulate data
 set.seed(123)
 X <- matrix(rnorm(50 * 10), nrow = 50, ncol = 10)
@@ -66,7 +72,7 @@ pls_biplot(pls_result)
 
 ### With mixOmics Objects
 
-```r
+``` r
 library(mixOmics)
 data(wine)
 
@@ -92,21 +98,12 @@ mixomics_scores_plot(splsda_mix)  # Automatically uses class labels
 
 ### Plotting Functions
 
-**For PCA:**
-- `pca_scores_plot()`: Create scores plot
-- `pca_loadings_plot()`: Create loadings plot  
+**For PCA:** - `pca_scores_plot()`: Create scores plot - `pca_loadings_plot()`: Create loadings plot\
 - `pca_biplot()`: Create combined scores and loadings plot
 
-**For PLS:**
-- `pls_scores_plot()`: Create scores plot
-- `pls_loadings_plot()`: Create loadings plot
-- `pls_biplot()`: Create combined scores and loadings plot
+**For PLS:** - `pls_scores_plot()`: Create scores plot - `pls_loadings_plot()`: Create loadings plot - `pls_biplot()`: Create combined scores and loadings plot
 
-**For mixOmics Objects:**
-- `mixomics_to_ggmultivar()`: Convert mixOmics object to ggmultivar format
-- `mixomics_scores_plot()`: Create scores plot directly from mixOmics object
-- `mixomics_loadings_plot()`: Create loadings plot directly from mixOmics object
-- `mixomics_biplot()`: Create biplot directly from mixOmics object
+**For mixOmics Objects:** - `mixomics_to_ggmultivar()`: Convert mixOmics object to ggmultivar format - `mixomics_scores_plot()`: Create scores plot directly from mixOmics object - `mixomics_loadings_plot()`: Create loadings plot directly from mixOmics object - `mixomics_biplot()`: Create biplot directly from mixOmics object
 
 ### Conversion Functions
 
@@ -120,7 +117,7 @@ mixomics_scores_plot(splsda_mix)  # Automatically uses class labels
 
 All plotting functions accept standard ggplot2 arguments and provide additional customization options:
 
-```r
+``` r
 # Customize scores plot
 pca_scores_plot(pca_result, 
                 x_component = 1, 
@@ -165,7 +162,7 @@ All analysis functions return a list with the following components:
 
 ## Dependencies
 
-- Required: R (>= 3.6.0), ggplot2, dplyr, tidyr, purrr, tibble
+- Required: R (\>= 3.6.0), ggplot2, dplyr, tidyr, purrr, tibble
 - Suggested: pls, mixOmics, testthat, knitr, rmarkdown, covr
 
 ## Contributing
