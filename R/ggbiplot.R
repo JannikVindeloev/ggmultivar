@@ -44,13 +44,27 @@
 #' }
 #' 
 #' @export
-ggbiplot <- function(data, x_component = 1, y_component = 2,
-                      color_by = NULL, show_ellipse = FALSE, ellipse_level = 0.95,
-                      show_score_labels = FALSE, show_loading_labels = TRUE,
-                      loading_label_size = 4, score_label_size = 3,
-                      arrow_length = 1, circle_radius = 1, show_circle = TRUE,
-                      facet_by = NULL, xlab = NULL, ylab = NULL,
-                      explained_variance = NULL, method = "pca", ...) {
+ggbiplot <- function(
+    data,
+    x_component = 1,
+    y_component = 2,
+    color_by = NULL,
+    show_ellipse = FALSE,
+    ellipse_level = 0.95,
+    show_score_labels = FALSE,
+    show_loading_labels = TRUE,
+    loading_label_size = 4,
+    score_label_size = 3,
+    arrow_length = 1,
+    circle_radius = 1,
+    show_circle = TRUE,
+    facet_by = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    explained_variance = NULL,
+    method = "pca",
+    ...
+) {
   
   # If data is a mixOmics object, extract scores and loadings
   if (inherits(data, c("pca", "pls", "spls", "splsda", "rgcca", "diablo"))) {

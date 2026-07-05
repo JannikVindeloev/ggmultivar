@@ -39,12 +39,23 @@
 #' }
 #' 
 #' @export
-ggloadings <- function(data, x_component = 1, y_component = 2,
-                       show_labels = TRUE, label_size = 4,
-                       show_arrows = TRUE, arrow_length = 1,
-                       color_by = NULL, circle_radius = 1,
-                       show_circle = TRUE, facet_by = NULL,
-                       xlab = NULL, ylab = NULL, method = "pca", ...) {
+ggloadings <- function(
+    data,
+    x_component = 1,
+    y_component = 2,
+    show_labels = TRUE,
+    label_size = 4,
+    show_arrows = TRUE,
+    arrow_length = 1,
+    color_by = NULL,
+    circle_radius = 1,
+    show_circle = TRUE,
+    facet_by = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    method = "pca",
+    ...
+) {
   
   # If data is a mixOmics object, extract loadings
   if (inherits(data, c("pca", "pls", "spls", "splsda", "rgcca", "diablo"))) {

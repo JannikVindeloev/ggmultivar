@@ -65,7 +65,7 @@ scores.pca <- function(object, components = 1:2, ...) {
       values_to = "score"
     ) |>
     dplyr::mutate(
-      component = as.numeric(gsub("X\.", "", component)),
+      component = as.numeric(gsub("X\\.", "", component)),
       .before = 1
     )
   
@@ -101,7 +101,7 @@ scores.pls <- function(object, components = 1:2, ...) {
       values_to = "score"
     ) |>
     dplyr::mutate(
-      component = as.numeric(gsub("X\.", "", component)),
+      component = as.numeric(gsub("X\\.", "", component)),
       .before = 1
     )
   
@@ -198,7 +198,7 @@ loadings.pca <- function(object, components = 1:2, type = c("X", "Y"), ...) {
       values_to = "loading"
     ) |>
     dplyr::mutate(
-      component = as.numeric(gsub("comp\.", "", component)),
+      component = as.numeric(gsub("comp\\.", "", component)),
       .before = 1
     )
   
@@ -239,7 +239,7 @@ loadings.pls <- function(object, components = 1:2, type = c("X", "Y"), ...) {
       values_to = "loading"
     ) |>
     dplyr::mutate(
-      component = as.numeric(gsub("comp\.", "", component)),
+      component = as.numeric(gsub("comp\\.", "", component)),
       .before = 1,
       variable_type = type
     )

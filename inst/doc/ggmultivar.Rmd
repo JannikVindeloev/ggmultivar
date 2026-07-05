@@ -142,15 +142,15 @@ data(wine)
 
 # PCA with mixOmics
 pca_mix <- pca(wine$X, ncomp = 3)
-mixomics_scores_plot(pca_mix, color_by = wine$Y)
+ggscores(pca_mix, color_by = wine$Y)
 
 # PLS with mixOmics
 pls_mix <- pls(wine$X, wine$Y, ncomp = 3)
-mixomics_biplot(pls_mix)
+ggbiplot(pls_mix)
 
 # sPLS-DA with mixOmics
 splsda_mix <- splsda(wine$X, wine$Y, ncomp = 3)
-mixomics_scores_plot(splsda_mix)  # Automatically uses class labels
+ggscores(splsda_mix)
 ```
 
 ## Customization Options
