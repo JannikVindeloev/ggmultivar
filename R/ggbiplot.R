@@ -117,11 +117,11 @@ ggbiplot <- function(
   
   # Extract scores for selected components
   scores_subset <- scores_data |>
-    dplyr::filter(component %in% c(x_component, y_component))
+    filter(component %in% c(x_component, y_component))
   
   # Pivot scores to wide format
   scores_wide <- scores_subset |>
-    tidyr::pivot_wider(
+    pivot_wider(
       names_from = component,
       values_from = score,
       names_prefix = "PC"
@@ -129,16 +129,16 @@ ggbiplot <- function(
   
   # Extract loadings for selected components
   loadings_subset <- loadings_data |>
-    dplyr::filter(component %in% c(x_component, y_component))
+    filter(component %in% c(x_component, y_component))
   
   # Pivot loadings to wide format and add scaled coordinates
   loadings_wide <- loadings_subset |>
-    tidyr::pivot_wider(
+    pivot_wider(
       names_from = component,
       values_from = loading,
       names_prefix = "PC"
     ) |>
-    dplyr::mutate(
+    mutate(
       x_scaled = .data[[paste0("PC", x_component)]] * arrow_length,
       y_scaled = .data[[paste0("PC", y_component)]] * arrow_length
     )
@@ -179,24 +179,24 @@ ggbiplot <- function(
   }
   
   # Create base aesthetic mapping for scores
-  aes_mapping <- ggplot2::aes(
+  aes_mapping <- aes(
     x = .data[[paste0("PC", x_component)]],
     y = .data[[paste0("PC", y_component)]]
   )
   
   # Add color aesthetic if provided
   if (!is.null(color_by)) {
-    aes_mapping <- aes_mapping + ggplot2::aes(color = .data[[color_by]])
+    aes_mapping <- aes_mapping + aes(color = .data[[color_by]])
   }
   
   # Create base plot with scores
-  p <- ggplot2::ggplot(scores_wide, aes_mapping) +
-    ggplot2::geom_point(size = 2, ...)
+  p <- ggplot(scores_wide, aes_mapping) +
+    geom_point(size = 2, ...)
   
   # Add ellipses if requested and color_by is provided
   if (show_ellipse && !is.null(color_by)) {
-    p <- p + ggplot2::stat_ellipse(
-      ggplot2::aes(group = .data[[color_by]]),
+    p <- p + stat_ellipse(
+      aes(group = .data[[color_by]]),
       level = ellipse_level,
       fill = NA,
       color = "gray50",
@@ -206,8 +206,8 @@ ggbiplot <- function(
   
   # Add score labels if requested
   if (show_score_labels) {
-    p <- p + ggplot2::geom_text(
-      ggplot2::aes(label = sample),
+    p <- p + geom_text(
+      aes(label = sample),
       size = score_label_size,
       vjust = -0.5,
       hjust = 0.5,
@@ -216,19 +216,19 @@ ggbiplot <- function(
   }
   
   # Add loading arrows
-  p <- p + ggplot2::geom_segment(
+  p <- p + geom_segment(
     data = loadings_wide,
-    ggplot2::aes(x = 0, y = 0, xend = x_scaled, yend = y_scaled),
-    arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    aes(x = 0, y = 0, xend = x_scaled, yend = y_scaled),
+    arrow = arrow(length = unit(0.2, "cm")),
     color = "red",
     ...
   )
   
   # Add loading labels if requested
   if (show_loading_labels) {
-    p <- p + ggplot2::geom_text(
+    p <- p + geom_text(
       data = loadings_wide,
-      ggplot2::aes(x = x_scaled, y = y_scaled, label = variable),
+      aes(x = x_scaled, y = y_scaled, label = variable),
       size = loading_label_size,
       color = "red",
       vjust = ifelse(loadings_wide$y_scaled > 0, -0.5, 1.5),
@@ -244,9 +244,9 @@ ggbiplot <- function(
       x = circle_radius * cos(seq(0, 2 * pi, length.out = 100)),
       y = circle_radius * sin(seq(0, 2 * pi, length.out = 100))
     )
-    p <- p + ggplot2::geom_path(
+    p <- p + geom_path(
       data = circle_data,
-      ggplot2::aes(x = x, y = y),
+      aes(x = x, y = y),
       color = "gray70",
       linetype = "dashed"
     )
@@ -254,7 +254,7 @@ ggbiplot <- function(
   
   # Add faceting if requested
   if (!is.null(facet_by)) {
-    p <- p + ggplot2::facet_wrap(ggplot2::vars(.data[[facet_by]]))
+    p <- p + facet_wrap(vars(.data[[facet_by]]))
   }
   
   # Set axis labels with variance explained
@@ -295,8 +295,8 @@ ggbiplot <- function(
   }
   
   p <- p +
-    ggplot2::xlab(xlab) +
-    ggplot2::ylab(ylab)
+    xlab(xlab) +
+    ylab(ylab)
   
   return(p)
 }

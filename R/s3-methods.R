@@ -59,14 +59,14 @@ scores.pca <- function(object, components = 1:2, ...) {
   
   # Convert to tidy format
   scores_tidy <- as.data.frame(scores_mat) |>
-    tibble::as_tibble(.name_repair = "unique") |>
-    dplyr::mutate(sample = sample_names) |>
-    tidyr::pivot_longer(
+    as_tibble(.name_repair = "unique") |>
+    mutate(sample = sample_names) |>
+    pivot_longer(
       cols = -sample,
       names_to = "component",
       values_to = "score"
     ) |>
-    dplyr::mutate(
+    mutate(
       component = as.numeric(gsub("X\\.", "", component)),
       .before = 1
     )
@@ -95,14 +95,14 @@ scores.pls <- function(object, components = 1:2, ...) {
   
   # Convert to tidy format
   scores_tidy <- as.data.frame(scores_mat) |>
-    tibble::as_tibble(.name_repair = "unique") |>
-    dplyr::mutate(sample = sample_names) |>
-    tidyr::pivot_longer(
+    as_tibble(.name_repair = "unique") |>
+    mutate(sample = sample_names) |>
+    pivot_longer(
       cols = -sample,
       names_to = "component",
       values_to = "score"
     ) |>
-    dplyr::mutate(
+    mutate(
       component = as.numeric(gsub("X\\.", "", component)),
       .before = 1
     )
@@ -194,14 +194,14 @@ loadings.pca <- function(object, components = 1:2, type = c("X", "Y"), ...) {
   
   # Convert to tidy format
   loadings_tidy <- as.data.frame(loadings_mat) |>
-    tibble::as_tibble(.name_repair = "unique") |>
-    dplyr::mutate(variable = variable_names) |>
-    tidyr::pivot_longer(
+    as_tibble(.name_repair = "unique") |>
+    mutate(variable = variable_names) |>
+    pivot_longer(
       cols = -variable,
       names_to = "component",
       values_to = "loading"
     ) |>
-    dplyr::mutate(
+    mutate(
       component = as.numeric(gsub("comp\\.", "", component)),
       .before = 1
     )
@@ -235,14 +235,14 @@ loadings.pls <- function(object, components = 1:2, type = c("X", "Y"), ...) {
   
   # Convert to tidy format
   loadings_tidy <- as.data.frame(loadings_mat) |>
-    tibble::as_tibble(.name_repair = "unique") |>
-    dplyr::mutate(variable = variable_names) |>
-    tidyr::pivot_longer(
+    as_tibble(.name_repair = "unique") |>
+    mutate(variable = variable_names) |>
+    pivot_longer(
       cols = -variable,
       names_to = "component",
       values_to = "loading"
     ) |>
-    dplyr::mutate(
+    mutate(
       component = as.numeric(gsub("comp\\.", "", component)),
       .before = 1,
       variable_type = type
@@ -316,7 +316,7 @@ explained_variance.pca <- function(object, ...) {
   eigval <- object$eigval
   total_var <- sum(eigval)
   
-  tibble::tibble(
+  tibble(
     component = 1:length(eigval),
     variance = eigval,
     variance_percent = eigval / total_var * 100,
@@ -333,7 +333,7 @@ explained_variance.pls <- function(object, ...) {
   
   n_comp <- object$ncomp
   
-  tibble::tibble(
+  tibble(
     component = 1:n_comp,
     x_variance = object$explVar$X[1:n_comp],
     y_variance = object$explVar$Y[1:n_comp],

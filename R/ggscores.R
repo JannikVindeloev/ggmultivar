@@ -101,11 +101,11 @@ ggscores <- function(
   
   # Filter to selected components
   scores_subset <- scores_data |>
-    dplyr::filter(component %in% c(x_component, y_component))
+    filter(component %in% c(x_component, y_component))
   
   # Pivot to wide format for plotting
   scores_wide <- scores_subset |>
-    tidyr::pivot_wider(
+    pivot_wider(
       names_from = component,
       values_from = score,
       names_prefix = "PC"
@@ -183,34 +183,34 @@ ggscores <- function(
   }
   
   # Create base aesthetic mapping
-  aes_mapping <- ggplot2::aes(
+  aes_mapping <- aes(
     x = .data[[paste0("PC", x_component)]],
     y = .data[[paste0("PC", y_component)]]
   )
   
   # Add color aesthetic if provided
   if (!is.null(color_by)) {
-    aes_mapping <- aes_mapping + ggplot2::aes(color = .data[[color_by]])
+    aes_mapping <- aes_mapping + aes(color = .data[[color_by]])
   }
   
   # Add shape aesthetic if provided
   if (!is.null(shape_by)) {
-    aes_mapping <- aes_mapping + ggplot2::aes(shape = .data[[shape_by]])
+    aes_mapping <- aes_mapping + aes(shape = .data[[shape_by]])
   }
   
   # Add size aesthetic if provided
   if (!is.null(size_by)) {
-    aes_mapping <- aes_mapping + ggplot2::aes(size = .data[[size_by]])
+    aes_mapping <- aes_mapping + aes(size = .data[[size_by]])
   }
   
   # Create base plot
-  p <- ggplot2::ggplot(scores_wide, aes_mapping) +
-    ggplot2::geom_point(...)
+  p <- ggplot(scores_wide, aes_mapping) +
+    geom_point(...)
   
   # Add ellipses if requested and color_by is provided
   if (show_ellipse && !is.null(color_by)) {
-    p <- p + ggplot2::stat_ellipse(
-      ggplot2::aes(group = .data[[color_by]]),
+    p <- p + stat_ellipse(
+      aes(group = .data[[color_by]]),
       level = ellipse_level,
       fill = NA,
       color = "gray50",
@@ -220,8 +220,8 @@ ggscores <- function(
   
   # Add labels if requested
   if (show_labels) {
-    p <- p + ggplot2::geom_text(
-      ggplot2::aes(label = sample),
+    p <- p + geom_text(
+      aes(label = sample),
       size = label_size,
       vjust = -0.5,
       hjust = 0.5,
@@ -231,7 +231,7 @@ ggscores <- function(
   
   # Add faceting if requested
   if (!is.null(facet_by)) {
-    p <- p + ggplot2::facet_wrap(ggplot2::vars(.data[[facet_by]]))
+    p <- p + facet_wrap(vars(.data[[facet_by]]))
   }
   
   # Set axis labels
@@ -272,8 +272,8 @@ ggscores <- function(
   }
   
   p <- p +
-    ggplot2::xlab(xlab) +
-    ggplot2::ylab(ylab)
+    xlab(xlab) +
+    ylab(ylab)
   
   return(p)
 }

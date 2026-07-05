@@ -93,11 +93,11 @@ ggloadings <- function(
   
   # Filter to selected components
   loadings_subset <- loadings_data |>
-    dplyr::filter(component %in% c(x_component, y_component))
+    filter(component %in% c(x_component, y_component))
   
   # Pivot to wide format for plotting
   loadings_wide <- loadings_subset |>
-    tidyr::pivot_wider(
+    pivot_wider(
       names_from = component,
       values_from = loading,
       names_prefix = "PC"
@@ -105,7 +105,7 @@ ggloadings <- function(
   
   # Add scaled coordinates for plotting
   loadings_wide <- loadings_wide |>
-    dplyr::mutate(
+    mutate(
       x_scaled = .data[[paste0("PC", x_component)]] * arrow_length,
       y_scaled = .data[[paste0("PC", y_component)]] * arrow_length
     )
@@ -146,14 +146,14 @@ ggloadings <- function(
   }
   
   # Create base plot
-  p <- ggplot2::ggplot(loadings_wide, 
-                       ggplot2::aes(x = x_scaled, y = y_scaled))
+  p <- ggplot(loadings_wide, 
+                       aes(x = x_scaled, y = y_scaled))
   
   # Add arrows if requested
   if (show_arrows) {
-    p <- p + ggplot2::geom_segment(
-      ggplot2::aes(x = 0, y = 0, xend = x_scaled, yend = y_scaled),
-      arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm")),
+    p <- p + geom_segment(
+      aes(x = 0, y = 0, xend = x_scaled, yend = y_scaled),
+      arrow = arrow(length = unit(0.2, "cm")),
       color = "gray50",
       ...
     )
@@ -161,13 +161,13 @@ ggloadings <- function(
   
   # Add color aesthetic if provided
   if (!is.null(color_by)) {
-    p <- p + ggplot2::aes(color = .data[[color_by]])
+    p <- p + aes(color = .data[[color_by]])
   }
   
   # Add labels if requested
   if (show_labels) {
-    p <- p + ggplot2::geom_text(
-      ggplot2::aes(label = variable),
+    p <- p + geom_text(
+      aes(label = variable),
       size = label_size,
       vjust = ifelse(loadings_wide$y_scaled > 0, -0.5, 1.5),
       hjust = ifelse(loadings_wide$x_scaled > 0, -0.1, 1.1),
@@ -182,9 +182,9 @@ ggloadings <- function(
       x = circle_radius * cos(seq(0, 2 * pi, length.out = 100)),
       y = circle_radius * sin(seq(0, 2 * pi, length.out = 100))
     )
-    p <- p + ggplot2::geom_path(
+    p <- p + geom_path(
       data = circle_data,
-      ggplot2::aes(x = x, y = y),
+      aes(x = x, y = y),
       color = "gray70",
       linetype = "dashed"
     )
@@ -192,7 +192,7 @@ ggloadings <- function(
   
   # Add faceting if requested
   if (!is.null(facet_by)) {
-    p <- p + ggplot2::facet_wrap(ggplot2::vars(.data[[facet_by]]))
+    p <- p + facet_wrap(vars(.data[[facet_by]]))
   }
   
   # Set axis labels
@@ -213,10 +213,10 @@ ggloadings <- function(
   }
   
   p <- p +
-    ggplot2::xlab(xlab) +
-    ggplot2::ylab(ylab) +
-    ggplot2::xlim(-circle_radius * 1.1, circle_radius * 1.1) +
-    ggplot2::ylim(-circle_radius * 1.1, circle_radius * 1.1)
+    xlab(xlab) +
+    ylab(ylab) +
+    xlim(-circle_radius * 1.1, circle_radius * 1.1) +
+    ylim(-circle_radius * 1.1, circle_radius * 1.1)
   
   return(p)
 }
