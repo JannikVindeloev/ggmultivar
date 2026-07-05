@@ -26,8 +26,38 @@
 #' @return A ggplot2 object
 #' 
 #' @examples
+#' # Create sample data
+#' scores_data <- data.frame(
+#'   sample = paste0("Sample_", 1:50),
+#'   component = rep(1:2, each = 50),
+#'   score = c(rnorm(50), rnorm(50))
+#' )
+#' 
+#' loadings_data <- data.frame(
+#'   variable = paste0("Var_", 1:10),
+#'   component = rep(1:2, each = 10),
+#'   loading = rnorm(20)
+#' )
+#' 
+#' # Basic biplot
+#' ggbiplot(list(scores = scores_data, loadings = loadings_data)) +
+#'   ggtitle("Basic Biplot")
+#' 
+#' # With coloring by a grouping variable
+#' color_vec <- sample(letters[1:3], 50, replace = TRUE)
+#' ggbiplot(list(scores = scores_data, loadings = loadings_data),
+#'          color_by = color_vec) +
+#'   geom_encircle(group_by = "color_by")
+#' 
+#' # With faceting
+#' facet_vec <- sample(letters[1:2], 50, replace = TRUE)
+#' ggbiplot(list(scores = scores_data, loadings = loadings_data),
+#'          facet_by = facet_vec)
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 

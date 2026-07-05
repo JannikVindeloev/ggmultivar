@@ -23,8 +23,30 @@
 #' @return A ggplot2 object
 #' 
 #' @examples
+#' # Create sample scores data
+#' scores_data <- data.frame(
+#'   sample = paste0("Sample_", 1:50),
+#'   component = rep(1:2, each = 50),
+#'   score = c(rnorm(50), rnorm(50))
+#' )
+#' 
+#' # Basic scores plot
+#' ggscores(scores_data) +
+#'   ggtitle("Basic Scores Plot")
+#' 
+#' # With coloring by a grouping variable
+#' color_vec <- sample(letters[1:3], 50, replace = TRUE)
+#' ggscores(scores_data, color_by = color_vec) +
+#'   geom_encircle(group_by = "color_by")
+#' 
+#' # With faceting
+#' facet_vec <- sample(letters[1:2], 50, replace = TRUE)
+#' ggscores(scores_data, facet_by = facet_vec)
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 

@@ -22,8 +22,28 @@
 #' @return A ggplot2 object
 #' 
 #' @examples
+#' # Create sample loadings data
+#' loadings_data <- data.frame(
+#'   variable = paste0("Var_", 1:10),
+#'   component = rep(1:2, each = 10),
+#'   loading = rnorm(20)
+#' )
+#' 
+#' # Basic loadings plot
+#' ggloadings(loadings_data) +
+#'   ggtitle("Basic Loadings Plot")
+#' 
+#' # With coloring by loading magnitude
+#' ggloadings(loadings_data, color_by = abs(loadings_data$loading))
+#' 
+#' # With faceting
+#' loadings_data$variable_type <- rep(c("X", "Y"), each = 5)
+#' ggloadings(loadings_data, facet_by = "variable_type")
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 

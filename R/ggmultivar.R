@@ -8,10 +8,39 @@
 #' @name ggmultivar
 #' @docType package
 #' @examples
-#' # With mixOmics objects
+#' # With base R data
+#' data(iris)
+#' 
+#' # Create a simple data frame with scores for demonstration
+#' scores_data <- data.frame(
+#'   sample = rownames(iris),
+#'   component = rep(1:2, each = nrow(iris)),
+#'   score = c(rnorm(nrow(iris)), rnorm(nrow(iris)))
+#' )
+#' 
+#' # Create scores plot
+#' ggscores(scores_data, color_by = iris$Species) +
+#'   ggtitle("Scores Plot - Iris Data")
+#' 
+#' # Create loadings data for demonstration
+#' loadings_data <- data.frame(
+#'   variable = colnames(iris)[1:4],
+#'   component = rep(1:2, each = 2),
+#'   loading = rnorm(4)
+#' )
+#' 
+#' # Create loadings plot
+#' ggloadings(loadings_data) +
+#'   ggtitle("Loadings Plot")
+#' 
+#' # Create biplot
+#' ggbiplot(list(scores = scores_data, loadings = loadings_data)) +
+#'   ggtitle("Biplot")
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
-#' library(ggmultivar)
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' 
 #' # PCA example

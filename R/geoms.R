@@ -23,17 +23,32 @@ NULL
 #' @return A layer that can be added to a ggplot
 #' 
 #' @examples
+#' # Create sample data
+#' scores_data <- data.frame(
+#'   sample = paste0("Sample_", 1:50),
+#'   PC1 = rnorm(50),
+#'   PC2 = rnorm(50),
+#'   group = sample(letters[1:3], 50, replace = TRUE)
+#' )
+#' 
+#' library(ggplot2)
+#' p <- ggplot(scores_data, aes(PC1, PC2)) +
+#'   geom_point()
+#' 
+#' p + geom_encircle(group_by = "group", color = "blue")
+#' 
+#' # With convex hull
+#' p + geom_encircle(group_by = "group", geom = "hull", fill = "red", alpha = 0.1)
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 
 #' ggscores(pca_obj, color_by = wine$Y) +
 #'   geom_encircle(group_by = "color_by", color = "blue")
-#' 
-#' # With convex hull
-#' ggscores(pca_obj, color_by = wine$Y) +
-#'   geom_encircle(group_by = "color_by", geom = "hull", fill = "red", alpha = 0.1)
 #' }
 #' 
 #' @export
@@ -147,8 +162,23 @@ StatHull <- ggproto("StatHull", Stat,
 #' @return A layer that can be added to a ggplot
 #' 
 #' @examples
+#' # Create sample loadings data
+#' loadings_data <- data.frame(
+#'   variable = paste0("Var_", 1:10),
+#'   component = rep(1:2, each = 10),
+#'   loading = rnorm(20)
+#' )
+#' 
+#' library(ggplot2)
+#' p <- ggplot(loadings_data, aes(x = loading, y = seq_along(loading))) +
+#'   geom_point()
+#' 
+#' p + geom_confidence_interval()
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 
@@ -245,8 +275,23 @@ StatConfidenceInterval <- ggproto("StatConfidenceInterval", Stat,
 #' @return A layer that can be added to a ggplot
 #' 
 #' @examples
+#' # Create sample data
+#' loadings_data <- data.frame(
+#'   variable = paste0("Var_", 1:10),
+#'   PC1 = rnorm(10),
+#'   PC2 = rnorm(10)
+#' )
+#' 
+#' library(ggplot2)
+#' p <- ggplot(loadings_data, aes(PC1, PC2)) +
+#'   geom_point()
+#' 
+#' p + geom_correlation_circle(radius = 1, color = "blue")
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 
@@ -303,8 +348,23 @@ geom_correlation_circle <- function(
 #' @return A layer that can be added to a ggplot
 #' 
 #' @examples
+#' # Create sample data
+#' scores_data <- data.frame(
+#'   sample = paste0("Sample_", 1:50),
+#'   PC1 = rnorm(50),
+#'   PC2 = rnorm(50)
+#' )
+#' 
+#' library(ggplot2)
+#' p <- ggplot(scores_data, aes(PC1, PC2)) +
+#'   geom_point()
+#' 
+#' p + geom_sample_labels(size = 2, color = "red")
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 
@@ -356,8 +416,23 @@ geom_sample_labels <- function(
 #' @return A layer that can be added to a ggplot
 #' 
 #' @examples
+#' # Create sample data
+#' loadings_data <- data.frame(
+#'   variable = paste0("Var_", 1:10),
+#'   x = rnorm(10),
+#'   y = rnorm(10)
+#' )
+#' 
+#' library(ggplot2)
+#' p <- ggplot(loadings_data, aes(x, y)) +
+#'   geom_point()
+#' 
+#' p + geom_variable_labels(size = 3, color = "blue")
+#' 
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' 

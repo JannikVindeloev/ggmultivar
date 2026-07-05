@@ -17,8 +17,10 @@ NULL
 #' @return A tidy data frame with columns: sample, component, score
 #' 
 #' @examples
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' scores <- scores(pca_obj)
@@ -148,8 +150,10 @@ scores.diablo <- function(object, components = 1:2, ...) {
 #' @return A tidy data frame with columns: variable, component, loading
 #' 
 #' @examples
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' loadings <- loadings(pca_obj)
@@ -281,8 +285,10 @@ loadings.diablo <- function(object, components = 1:2, type = c("X", "Y"), ...) {
 #' @return A data frame with explained variance information
 #' 
 #' @examples
+#' # With mixOmics objects (if installed)
 #' \dontrun{
 #' library(mixOmics)
+#' library(FactoMineR)
 #' data(wine)
 #' pca_obj <- pca(wine$X, ncomp = 3)
 #' var_exp <- explained_variance(pca_obj)

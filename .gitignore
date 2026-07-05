@@ -31,7 +31,8 @@ coverage/
 .Rcheck/
 *_*.tar.gz
 
-
+# Generated README
+README.md
 
 # IDE specific files
 .idea/
