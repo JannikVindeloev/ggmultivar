@@ -48,3 +48,4 @@ NULL
 #' @useDynLib ggmultivar, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
+NULL
