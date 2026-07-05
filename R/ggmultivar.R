@@ -73,7 +73,4 @@ NULL
 #' @importFrom tidyr pivot_longer pivot_wider
 #' @importFrom purrr map map_df
 #' @importFrom tibble tibble as_tibble
-#' @useDynLib ggmultivar, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
-NULL
 NULL

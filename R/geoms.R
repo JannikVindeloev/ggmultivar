@@ -3,7 +3,7 @@
 #' @description Custom geoms for adding confidence intervals and encircling groups in ggmultivar plots.
 #' 
 #' @name custom-geoms
-#' @importFrom ggplot2 Stat StatEllipse GeomPath GeomPolygon GeomText PositionIdentity Layer ggproto aes
+#' @importFrom ggplot2 Stat StatEllipse GeomPath GeomPolygon GeomText PositionIdentity ggproto aes
 NULL
 
 #' Geom for Encircing Groups
@@ -72,7 +72,7 @@ geom_encircle <- function(
     stop("group_by must be specified")
   }
   
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = switch(
@@ -201,7 +201,7 @@ geom_confidence_interval <- function(
   
   method <- match.arg(method)
   
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     stat = StatConfidenceInterval,
@@ -317,7 +317,7 @@ geom_correlation_circle <- function(
     y = radius * sin(seq(0, 2 * pi, length.out = 100))
   )
   
-  layer(
+  ggplot2::layer(
     data = circle_data,
     mapping = mapping,
     geom = ggplot2::GeomPath,
@@ -385,7 +385,7 @@ geom_sample_labels <- function(
     ...
 ) {
   
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     geom = ggplot2::GeomText,
@@ -450,7 +450,7 @@ geom_variable_labels <- function(
     ...
 ) {
   
-  layer(
+  ggplot2::layer(
     data = data,
     mapping = mapping,
     geom = ggplot2::GeomText,
