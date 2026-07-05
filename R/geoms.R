@@ -3,7 +3,6 @@
 #' @description Custom geoms for adding confidence intervals and encircling groups in ggmultivar plots.
 #' 
 #' @name custom-geoms
-#' @importFrom ggplot2 Stat StatEllipse GeomPath GeomPolygon GeomText PositionIdentity ggproto aes
 NULL
 
 #' Geom for Encircing Groups
@@ -72,34 +71,27 @@ geom_encircle <- function(
     stop("group_by must be specified")
   }
   
-  # Convert group_by string to symbol for aesthetic mapping
-  group_sym <- as.name(group_by)
-  
-  # Create aesthetic mapping for grouping
-  group_aes <- ggplot2::aes(group = group_sym)
-  
-  # Combine with existing mapping
-  combined_mapping <- ggplot2::aes_string(mapping, group_aes)
-  
-  ggplot2::layer(
+  # Create the layer with proper aesthetic mapping
+  layer(
     data = data,
-    mapping = combined_mapping,
+    mapping = mapping,
     stat = switch(
       geom,
-      "ellipse" = ggplot2::StatEllipse,
+      "ellipse" = StatEllipse,
       "hull" = StatHull,
       "polygon" = StatHull
     ),
     geom = switch(
       geom,
-      "ellipse" = ggplot2::GeomPath,
-      "hull" = ggplot2::GeomPolygon,
-      "polygon" = ggplot2::GeomPolygon
+      "ellipse" = GeomPath,
+      "hull" = GeomPolygon,
+      "polygon" = GeomPolygon
     ),
-    position = ggplot2::PositionIdentity,
+    position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
+      group = as.name(group_by),
       level = level,
       color = color,
       fill = fill,
@@ -118,7 +110,7 @@ geom_encircle <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatHull <- ggplot2::ggproto("StatHull", ggplot2::Stat,
+StatHull <- ggproto("StatHull", Stat,
   required_aes = c("x", "y", "group"),
   
   compute_group = function(data, scales, group = NULL) {
@@ -151,7 +143,7 @@ StatHull <- ggplot2::ggproto("StatHull", ggplot2::Stat,
       return(data.frame())
     }
     
-    return(dplyr::bind_rows(hull_data))
+    return(bind_rows(hull_data))
   }
 )
 
@@ -209,12 +201,12 @@ geom_confidence_interval <- function(
   
   method <- match.arg(method)
   
-  ggplot2::layer(
+  layer(
     data = data,
     mapping = mapping,
     stat = StatConfidenceInterval,
-    geom = ggplot2::GeomPath,
-    position = ggplot2::PositionIdentity,
+    geom = GeomPath,
+    position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
@@ -236,7 +228,7 @@ geom_confidence_interval <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatConfidenceInterval <- ggplot2::ggproto("StatConfidenceInterval", ggplot2::Stat,
+StatConfidenceInterval <- ggproto("StatConfidenceInterval", Stat,
   required_aes = c("x", "y", "variable", "component"),
   
   compute_group = function(data, scales, method = "bootstrap", n_boot = 100, level = 0.95) {
@@ -266,7 +258,7 @@ StatConfidenceInterval <- ggplot2::ggproto("StatConfidenceInterval", ggplot2::St
       return(data.frame())
     }
     
-    return(dplyr::bind_rows(ci_data))
+    return(bind_rows(ci_data))
   }
 )
 
@@ -325,15 +317,15 @@ geom_correlation_circle <- function(
     y = radius * sin(seq(0, 2 * pi, length.out = 100))
   )
   
-  ggplot2::layer(
+  layer(
     data = circle_data,
     mapping = mapping,
-    geom = ggplot2::GeomPath,
-    position = ggplot2::PositionIdentity,
+    geom = GeomPath,
+    position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = FALSE,
     params = list(
-      ggplot2::aes(x = x, y = y),
+      aes(x = x, y = y),
       color = color,
       linetype = linetype,
       ...
@@ -393,15 +385,15 @@ geom_sample_labels <- function(
     ...
 ) {
   
-  ggplot2::layer(
+  layer(
     data = data,
     mapping = mapping,
-    geom = ggplot2::GeomText,
-    position = ggplot2::PositionIdentity,
+    geom = GeomText,
+    position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
-      ggplot2::aes(label = sample),
+      aes(label = sample),
       size = size,
       color = color,
       vjust = vjust,
@@ -458,15 +450,15 @@ geom_variable_labels <- function(
     ...
 ) {
   
-  ggplot2::layer(
+  layer(
     data = data,
     mapping = mapping,
-    geom = ggplot2::GeomText,
-    position = ggplot2::PositionIdentity,
+    geom = GeomText,
+    position = PositionIdentity,
     show.legend = FALSE,
     inherit.aes = TRUE,
     params = list(
-      ggplot2::aes(label = variable),
+      aes(label = variable),
       size = size,
       color = color,
       vjust = ifelse(data$y > 0, -0.5, 1.5),
